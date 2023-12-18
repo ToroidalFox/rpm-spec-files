@@ -7,9 +7,20 @@ Summary: Korean IME
 Url: https://github.com/Riey/kime
 Source0: https://github.com/Riey/kime/archive/refs/tags/v3.0.2.tar.gz
 
-BuildArch: noarch
-BuildRequires: cmake clang-libs cargo pkgconf-pkg-config
-# requirements verified: cmake cargo pkgconf-pkg-config clang-devel fontconfig-devel dbus-devel
+# hopefully noarch
+# BuildArch: noarch
+BuildRequires: cmake clang-devel cargo gtk3-devel pkgconf-pkg-config fontconfig-devel dbus-devel
+# requirements:
+#     cmake
+#     clang-devel
+#     cargo
+#     gtk3-devel
+# indirect requirements:
+#     pkgconf-pkg-config is dependency of gtk3-devel
+#     fontconfig-devel is dependency of gtk3-devel
+#     dbus-devel is dependency of gtk3-devel
+# unchecked requirements:
+#     libxcb-devel is may required and is dependency of gtk3-devel
 
 %define kime_conf_dir /etc/xdg/%{name}
 %define kime_inc_dir %{_includedir}
