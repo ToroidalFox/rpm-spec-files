@@ -40,6 +40,14 @@ kime is a fast, lightweight, reliable and highly customizablr input engine for K
 
 %build
 scripts/build.sh -ar
+cat > %{kime_out}/kime-imsettings.conf << EOF
+SHORT_DESC="kime"
+XIM=kime
+XIM_PROGRAM=/usr/bin/kime-xim
+GTK_IM_MODULE=kime
+QT_IM_MODULE=kime
+AUXILIARY_PROGRAM=/usr/bin/kime-indicator
+EOF
 
 %install
 install -Dm755 %{kime_out}/kime-check -t %{buildroot}%{_bindir}
@@ -65,16 +73,7 @@ install -Dm644 %{kime_out}/kime.desktop %{buildroot}/etc/xdg/autostart/kime.desk
 mkdir -p %{buildroot}%{_datadir}/icons/hicolors/64x64/apps
 install -Dm644 %{kime_out}/icons/64x64/* -t %{buildroot}%{_datadir}/icons/hicolor/64x64/apps
 # install -Dm644 %%{kime_out}/icons/* %%{buildroot}%%{_datadir}/%%{name}/icons/ # reserved for next version
-
-# integration with imsettings
-cat > %{buildroot}/etc/X11/xinit/xinput.d/kime.conf << EOF
-SHORT_DESC="kime"
-XIM=kime
-XIM_PROGRAM=/usr/bin/kime-xim
-GTK_IM_MODULE=kime
-QT_IM_MODULE=kime
-AUXILIARY_PROGRAM=/usr/bin/kime-indicator
-EOF
+install -Dm644 %{kime_out}/kime-imsettings.conf %{buildroot}/etc/X11/xinit/xinput.d/kime.conf
 
 %files
 %license LICENSE*
@@ -104,5 +103,4 @@ EOF
 /etc/xdg/autostart/kime.desktop
 %{_datadir}/icons/hicolor/64x64/apps/*
 # %%{_datadir}/%%{name}/icons/* # reserved for next version
-
 /etc/X11/xinit/xinput.d/kime.conf
