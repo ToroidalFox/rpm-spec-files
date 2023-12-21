@@ -1,6 +1,6 @@
 Name: kime
 Version: 3.0.2
-Release: 1
+Release: 2
 License: GPLv3
 Summary: Korean IME
 Url: https://github.com/Riey/kime
@@ -66,6 +66,16 @@ mkdir -p %{buildroot}%{_datadir}/icons/hicolors/64x64/apps
 install -Dm644 %{kime_out}/icons/64x64/* -t %{buildroot}%{_datadir}/icons/hicolor/64x64/apps
 # install -Dm644 %%{kime_out}/icons/* %%{buildroot}%%{_datadir}/%%{name}/icons/ # reserved for next version
 
+# integration with imsettings
+cat > %{buildroot}/etc/X11/xinit/xinput.d/kime.conf << EOF
+SHORT_DESC="kime"
+XIM=kime
+XIM_PROGRAM=/usr/bin/kime-xim
+GTK_IM_MODULE=kime
+QT_IM_MODULE=kime
+AUXILIARY_PROGRAM=/usr/bin/kime-indicator
+EOF
+
 %files
 %license LICENSE*
 %doc README.md
@@ -94,3 +104,5 @@ install -Dm644 %{kime_out}/icons/64x64/* -t %{buildroot}%{_datadir}/icons/hicolo
 /etc/xdg/autostart/kime.desktop
 %{_datadir}/icons/hicolor/64x64/apps/*
 # %%{_datadir}/%%{name}/icons/* # reserved for next version
+
+/etc/X11/xinit/xinput.d/kime.conf
