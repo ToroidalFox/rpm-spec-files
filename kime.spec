@@ -42,28 +42,28 @@ Kime is a fast, lightweight, and reliable input engine for Korean input.
 scripts/build.sh -ar
 
 %install
-install -Dm755 %{kime_out}/kime-check %{buildroot}%{_bindir}
-install -Dm755 %{kime_out}/kime-indicator %{buildroot}%{_bindir}
-install -Dm755 %{kime_out}/kime-candidate-window %{buildroot}%{_bindir}
-install -Dm755 %{kime_out}/kime-xim %{buildroot}%{_bindir}
-install -Dm755 %{kime_out}/kime-wayland %{buildroot}%{_bindir}
-install -Dm755 %{kime_out}/kime %{buildroot}%{_bindir}
+install -Dm755 %{kime_out}/kime-check -t %{buildroot}%{_bindir}
+install -Dm755 %{kime_out}/kime-indicator -t %{buildroot}%{_bindir}
+install -Dm755 %{kime_out}/kime-candidate-window -t %{buildroot}%{_bindir}
+install -Dm755 %{kime_out}/kime-xim -t %{buildroot}%{_bindir}
+install -Dm755 %{kime_out}/kime-wayland -t %{buildroot}%{_bindir}
+install -Dm755 %{kime_out}/kime -t %{buildroot}%{_bindir}
 
+install -Dm755 %{kime_out}/libkime_engine.so -t %{buildroot}%{_libdir}
+install -Dm755 %{kime_out}/libkime-gtk3.so -t %{buildroot}%{_libdir}/gtk-3.0/3.0.0/immodules/libim-kime.so
+install -Dm755 %{kime_out}/libkime-gtk4.so -t %{buildroot}%{_libdir}/gtk-4.0/4.0.0/immodules/libim-kime.so
+install -Dm755 %{kime_out}/libkime-qt5.so -t %{buildroot}%{_libdir}/qt5/plugins/platforminputcontexts/libkimeplatforminputcontextplugin.so
+install -Dm755 %{kime_out}/libkime-qt6.so -t %{buildroot}%{_libdir}/qt6/plugins/platforminputcontexts/libkimeplatforminputcontextplugin.so
 
-install -Dm755 %{kime_out}/libkime-gtk3.so %{buildroot}%{_libdir}/gtk-3.0/3.0.0/immodules/libim-kime.so
-install -Dm755 %{kime_out}/libkime-gtk4.so %{buildroot}%{_libdir}/gtk-4.0/4.0.0/immodules/libim-kime.so
-install -Dm755 %{kime_out}/libkime-qt5.so %{buildroot}%{_libdir}/qt5/plugins/platforminputcontexts/libkimeplatforminputcontextplugin.so
-install -Dm755 %{kime_out}/libkime-qt6.so %{buildroot}%{_libdir}/qt6/plugins/platforminputcontexts/libkimeplatforminputcontextplugin.so
-
-install -Dm644 %{kime_out}/kime_engine.hpp %{buildroot}%{_includedir}
-install -Dm644 %{kime_out}/kime_engine.h %{buildroot}%{_includedir}
+install -Dm644 %{kime_out}/kime_engine.hpp -t %{buildroot}%{_includedir}
+install -Dm644 %{kime_out}/kime_engine.h -t %{buildroot}%{_includedir}
 
 # etc
-install -Dm644 %{kime_out}/default_config.yaml %{buildroot}/etc/xdg/%{name}/config.yaml
-# install -Dm755 %%{kime_out}/kime-xdg-autostart %%{buildroot}%%{_bindir} # reserved for next version
-install -Dm644 %{kime_out}/kime.desktop %{buildroot}/etc/xdg/autostart/kime.desktop
+install -Dm644 %{kime_out}/default_config.yaml -t %{buildroot}/etc/xdg/%{name}/config.yaml
+# install -Dm755 %%{kime_out}/kime-xdg-autostart -t %%{buildroot}%%{_bindir} # reserved for next version
+install -Dm644 %{kime_out}/kime.desktop -t %{buildroot}/etc/xdg/autostart/kime.desktop
 mkdir -p %{buildroot}%{_datadir}/icons/hicolors/64x64/apps
-install -Dm644 %{kime_out}/icons/64x64/* %{buildroot}%{_datadir}/icons/hicolor/64x64/apps/
+install -Dm644 %{kime_out}/icons/64x64/* -t %{buildroot}%{_datadir}/icons/hicolor/64x64/apps
 # install -Dm644 %%{kime_out}/icons/* %%{buildroot}%%{_datadir}/%%{name}/icons/ # reserved for next version
 
 %files
@@ -80,10 +80,14 @@ install -Dm644 %{kime_out}/icons/64x64/* %{buildroot}%{_datadir}/icons/hicolor/6
 %{_bindir}/kime-wayland
 %{_bindir}/kime
 
+%{_libdir}/libkime_engine.so
 %{_libdir}/gtk-3.0/3.0.0/immodules/libim-%{name}.so
 %{_libdir}/gtk-4.0/4.0.0/immodules/libim-%{name}.so
 %{_libdir}/qt5/plugins/platforminputcontexts/lib%{name}platforminputcontextplugin.so
 %{_libdir}/qt6/plugins/platforminputcontexts/lib%{name}platforminputcontextplugin.so
+
+%{_includedir}/kime_engine.hpp
+%{_includedir}/kime_engine.h
 
 /etc/xdg/%{name}/config.yaml
 # %%{_bindir}/kime-xdg-autostart # reserved for next version
