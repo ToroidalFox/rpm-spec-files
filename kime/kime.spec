@@ -4,7 +4,7 @@ Release: 1
 License: GPLv3
 Summary: Korean IME
 Url: https://github.com/Riey/kime
-Source0: https://github.com/Riey/kime/archive/refs/tags/v%{version}.tar.gz
+Source0: %{url}/archive/refs/tags/v%{version}.tar.gz
 
 # NOTE: On 3.0.2, `kime.desktop` relies on `kime` executable to be in `/usr/bin` which is same as %%{_bindir} for now.
 # NOTE: Currently(3.0.2.git.673.33603e0) `kime.desktop` relies on `kime-xdg-autostart` to be in `/usr/bin` which is same as %%{_bindir} for now. However, restructuring is needed if this changes in the future.
@@ -33,7 +33,7 @@ BuildRequires: cmake clang-devel cargo pkgconf-pkg-config gtk3-devel gtk4-devel 
 
 %description
 
-Kime is a fast, lightweight, and reliable input engine for Korean input.
+kime is a fast, lightweight, reliable and highly customizablr input engine for Korean input.
 
 %prep
 %autosetup
@@ -94,7 +94,3 @@ install -Dm644 %{kime_out}/icons/64x64/* -t %{buildroot}%{_datadir}/icons/hicolo
 /etc/xdg/autostart/kime.desktop
 %{_datadir}/icons/hicolor/64x64/apps/*
 # %%{_datadir}/%%{name}/icons/* # reserved for next version
-
-%changelog
-* Thu Dec 21 2023 - 3.0.2
-- Created with version 3.0.2
