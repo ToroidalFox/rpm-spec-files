@@ -1,21 +1,24 @@
-%global srcname copr-tito-quickdoc
 Name: kime
 Version: 3.0.2
 Release: 1
 License: GPLv3
 Summary: Korean IME
 Url: https://github.com/Riey/kime
-Source0: https://github.com/Riey/kime/archive/refs/tags/v3.0.2.tar.gz
+Source0: https://github.com/Riey/kime/archive/refs/tags/v%{version}.tar.gz
 
-# hopefully noarch
+# NOTE: On 3.0.2, `kime.desktop` relies on `kime` executable to be in `/usr/bin` which is same as %%{_bindir} for now.
+# NOTE: Currently(3.0.2.git.673.33603e0) `kime.desktop` relies on `kime-xdg-autostart` to be in `/usr/bin` which is same as %%{_bindir} for now. However, restructuring is needed if this changes in the future.
+
+# hopefully noarch; not tested.
 # BuildArch: noarch
 
-# build dependencies from kime(package name):
+# from README.md of kime github repository,
+# build dependencies(package name):
 #     cmake(cmake)
 #     libclang(clang-devel)
 #     cargo(cargo)
 #     pkg-config(pkgconf-pkg-config)
-# optional dependencies from kime:
+# optional build dependencies:
 #     gtk3(gtk3-devel)
 #     gtk4(gtk4-devel)
 #     qtbase5-private(qt5-qtbase-private-devel)
@@ -30,7 +33,7 @@ BuildRequires: cmake clang-devel cargo pkgconf-pkg-config gtk3-devel gtk4-devel 
 
 %description
 
-Kime is a fast and reliable input engine.
+Kime is a fast, lightweight, and reliable input engine for Korean input.
 
 %prep
 %autosetup
@@ -39,7 +42,7 @@ Kime is a fast and reliable input engine.
 scripts/build.sh -ar
 
 %install
-install -Dm755 %{kime-out}/kime-check %{buildroot}%{_bindir}
+install -Dm755 %{kime_out}/kime-check %{buildroot}%{_bindir}
 install -Dm755 %{kime_out}/kime-indicator %{buildroot}%{_bindir}
 install -Dm755 %{kime_out}/kime-candidate-window %{buildroot}%{_bindir}
 install -Dm755 %{kime_out}/kime-xim %{buildroot}%{_bindir}
@@ -57,9 +60,11 @@ install -Dm644 %{kime_out}/kime_engine.h %{buildroot}%{_includedir}
 
 # etc
 install -Dm644 %{kime_out}/default_config.yaml %{buildroot}/etc/xdg/%{name}/config.yaml
-install -Dm755 %{kime_out}/kime-xdg-autostart %{buildroot}%{_bindir}
+# install -Dm755 %%{kime_out}/kime-xdg-autostart %%{buildroot}%%{_bindir} # reserved for next version
 install -Dm644 %{kime_out}/kime.desktop %{buildroot}/etc/xdg/autostart/kime.desktop
-install -Dm644 %{kime_out}/icons/* %{buildroot}%{_datadir}/%{name}/icons/
+mkdir -p %{buildroot}%{_datadir}/icons/hicolors/64x64/apps
+install -Dm644 %{kime_out}/icons/64x64/* %{buildroot}%{_datadir}/icons/hicolor/64x64/apps/
+# install -Dm644 %%{kime_out}/icons/* %%{buildroot}%%{_datadir}/%%{name}/icons/ # reserved for next version
 
 %files
 %license LICENSE*
@@ -81,11 +86,11 @@ install -Dm644 %{kime_out}/icons/* %{buildroot}%{_datadir}/%{name}/icons/
 %{_libdir}/qt6/plugins/platforminputcontexts/lib%{name}platforminputcontextplugin.so
 
 /etc/xdg/%{name}/config.yaml
-%{_bindir}/kime-xdg-autostart
+# %%{_bindir}/kime-xdg-autostart # reserved for next version
 /etc/xdg/autostart/kime.desktop
-%{_datadir}/%{name}/icons/*
+%{_datadir}/icons/hicolor/64x64/apps/*
+# %%{_datadir}/%%{name}/icons/* # reserved for next version
 
-#-- CHANGELOG -----------------------------------------------------------------#
 %changelog
 * Thu Dec 21 2023 - 3.0.2
 - Created with version 3.0.2
