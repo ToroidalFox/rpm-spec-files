@@ -1,12 +1,11 @@
 Name: kime
 Version: 3.0.2
-Release: 2
+Release: 3
 License: GPLv3
 Summary: Korean IME
 Url: https://github.com/Riey/kime
 Source0: %{url}/archive/refs/tags/v%{version}.tar.gz
 
-# NOTE: On 3.0.2, `kime.desktop` relies on `kime` executable to be in `/usr/bin` which is same as %%{_bindir} for now.
 # NOTE: Currently(3.0.2.git.673.33603e0) `kime.desktop` relies on `kime-xdg-autostart` to be in `/usr/bin` which is same as %%{_bindir} for now. However, restructuring is needed if this changes in the future.
 
 # hopefully noarch; not tested.
@@ -69,7 +68,6 @@ install -Dm644 %{kime_out}/kime_engine.h -t %{buildroot}%{_includedir}
 # etc
 install -Dm644 %{kime_out}/default_config.yaml %{buildroot}/etc/xdg/%{name}/config.yaml
 # install -Dm755 %%{kime_out}/kime-xdg-autostart -t %%{buildroot}%%{_bindir} # reserved for next version
-install -Dm644 %{kime_out}/kime.desktop %{buildroot}/etc/xdg/autostart/kime.desktop
 mkdir -p %{buildroot}%{_datadir}/icons/hicolors/64x64/apps
 install -Dm644 %{kime_out}/icons/64x64/* -t %{buildroot}%{_datadir}/icons/hicolor/64x64/apps
 # install -Dm644 %%{kime_out}/icons/* %%{buildroot}%%{_datadir}/%%{name}/icons/ # reserved for next version
@@ -100,7 +98,6 @@ install -Dm644 %{kime_out}/kime-imsettings.conf %{buildroot}/etc/X11/xinit/xinpu
 
 /etc/xdg/%{name}/config.yaml
 # %%{_bindir}/kime-xdg-autostart # reserved for next version
-/etc/xdg/autostart/kime.desktop
 %{_datadir}/icons/hicolor/64x64/apps/*
 # %%{_datadir}/%%{name}/icons/* # reserved for next version
 /etc/X11/xinit/xinput.d/kime.conf
