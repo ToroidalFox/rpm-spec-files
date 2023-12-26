@@ -1,6 +1,6 @@
 Name: kime
 Version: 3.0.2
-Release: 3
+Release: 4
 License: GPLv3
 Summary: Korean IME
 Url: https://github.com/Riey/kime
@@ -57,7 +57,7 @@ install -Dm755 %{kime_out}/kime-wayland -t %{buildroot}%{_bindir}
 install -Dm755 %{kime_out}/kime -t %{buildroot}%{_bindir}
 
 install -Dm755 %{kime_out}/libkime_engine.so -t %{buildroot}%{_libdir}
-install -Dm755 %{kime_out}/libkime-gtk3.so %{buildroot}%{_libdir}/gtk-3.0/3.0.0/immodules/libim-kime.so
+install -Dm755 %{kime_out}/libkime-gtk3.so %{buildroot}%{_libdir}/gtk-3.0/3.0.0/immodules/im-kime.so
 install -Dm755 %{kime_out}/libkime-gtk4.so %{buildroot}%{_libdir}/gtk-4.0/4.0.0/immodules/libim-kime.so
 install -Dm755 %{kime_out}/libkime-qt5.so %{buildroot}%{_libdir}/qt5/plugins/platforminputcontexts/libkimeplatforminputcontextplugin.so
 install -Dm755 %{kime_out}/libkime-qt6.so %{buildroot}%{_libdir}/qt6/plugins/platforminputcontexts/libkimeplatforminputcontextplugin.so
@@ -88,10 +88,10 @@ install -Dm644 %{kime_out}/kime-imsettings.conf %{buildroot}/etc/X11/xinit/xinpu
 %{_bindir}/kime
 
 %{_libdir}/libkime_engine.so
-%{_libdir}/gtk-3.0/3.0.0/immodules/libim-%{name}.so
-%{_libdir}/gtk-4.0/4.0.0/immodules/libim-%{name}.so
-%{_libdir}/qt5/plugins/platforminputcontexts/lib%{name}platforminputcontextplugin.so
-%{_libdir}/qt6/plugins/platforminputcontexts/lib%{name}platforminputcontextplugin.so
+%{_libdir}/gtk-3.0/3.0.0/immodules/im-kime.so
+%{_libdir}/gtk-4.0/4.0.0/immodules/libim-kime.so
+%{_libdir}/qt5/plugins/platforminputcontexts/libkimeplatforminputcontextplugin.so
+%{_libdir}/qt6/plugins/platforminputcontexts/libkimeplatforminputcontextplugin.so
 
 %{_includedir}/kime_engine.hpp
 %{_includedir}/kime_engine.h
