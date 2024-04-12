@@ -18,7 +18,8 @@ repo_latest_commit = web.get(REPO_DEV_LATEST_COMMIT)
 repo_commit_count = re.search(
     COMMIT_COUNT_REGEX, repo_latest_commit.headers["Link"]
 ).group(1)  # type: ignore
-repo_latest_commit_id = json.loads(repo_latest_commit.content)[0]["sha"][:7]
+repo_latest_commit_hash = json.loads(repo_latest_commit.content)[0]["sha"]
+repo_latest_commit_id = repo_latest_commit_hash[:7]
 
 
 package_version = f"{repo_latest_tag}^git_{repo_commit_count}_{repo_latest_commit_id}"
@@ -53,7 +54,7 @@ Conflicts: kime
 kime is a fast, lightweight, reliable and highly customizable input engine for Korean input.
 
 %prep
-%autosetup -n %{{name}}-{repo_latest_commit_id}
+%autosetup -n kime-{repo_latest_commit_hash}
 
 %build
 scripts/build.sh -ar
