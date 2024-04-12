@@ -52,7 +52,8 @@ install -Dm644 %{kime_out}/kime_engine.h -t %{buildroot}%{_includedir}
 install -Dm644 %{kime_out}/kime_engine.hpp -t %{buildroot}%{_includedir}
 
 # etc
-install -Dm644 %{kime_out}/kime.desktop -t /etc/xdg/autostart
+install -Dm644 %{kime_out}/kime.desktop -t %{buildroot}/etc/xdg/autostart
+install -Dm644 %{kime_out}/kime.desktop -t %{buildroot}%{_datadir}/applications
 install -Dm644 %{kime_out}/icons/64x64/* -t %{buildroot}%{_datadir}/icons/hicolor/64x64/apps
 
 %files
