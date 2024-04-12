@@ -109,6 +109,8 @@ install -Dm644 %{{kime_out}}/icons/64x64/* -t %{{buildroot}}%{{_datadir}}/icons/
 %{{_includedir}}/kime_engine.h
 %{{_includedir}}/kime_engine.hpp
 
+/etc/xdg/autostart/kime.desktop
+%{{_datadir}}/applications/kime.desktop
 %{{_datadir}}/icons/hicolor/64x64/apps/*
 """
 
