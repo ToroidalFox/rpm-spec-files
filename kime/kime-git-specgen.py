@@ -32,21 +32,6 @@ Summary: Korean IME
 Url: https://github.com/Riey/kime
 Source0: %{{url}}/archive/{repo_latest_commit_id}.tar.gz
 
-# from README.md of kime github repository,
-# build dependencies(package name):
-#     cmake(cmake)
-#     libclang(clang-devel)
-#     cargo(cargo)
-#     pkg-config(pkgconf-pkg-config)
-# optional build dependencies:
-#     gtk3(gtk3-devel)
-#     gtk4(gtk4-devel)
-#     qtbase5-private(qt5-qtbase-private-devel)
-#     qtbase6-private(qt6-qtbase-private-devel)
-#     libdbus(dbus-devel)
-#     xcb(libxcb-devel)
-#     fontconfig(fontconfig-devel)
-#     freetype(freetype-devel)
 BuildRequires: cmake
 BuildRequires: clang-devel
 BuildRequires: cargo
@@ -60,6 +45,8 @@ BuildRequires: libxcb-devel
 BuildRequires: fontconfig-devel
 BuildRequires: freetype-devel
 
+Conflicts: kime
+
 %define kime_out build/out
 
 %description
@@ -70,31 +57,15 @@ kime is a fast, lightweight, reliable and highly customizable input engine for K
 
 %build
 scripts/build.sh -ar
-cat > %{{kime_out}}/kime-test.desktop << EOF
-[Desktop Entry]
-Exec=/usr/bin/kime
-Name=kime daemon
-Name[ko]=kime 데몬
-Comment=Start kime daemon
-Type=Application
-Terminal=false
-NoDisplay=true
-StartupNotify=false
-X-DBUS-StartupType=Unique
-X-GNOME-AutoRestart=false
-X-GNOME-Autostart-Notify=false
-X-KDE-StartupNotify=false
-X-KDE-Wayland-VirtualKeyboard=true
-Icon=kime-han-black
-EOF
 
 %install
+install -Dm755 %{{kime_out}}/kime -t %{{buildroot}}%{{_bindir}}
+install -Dm755 %{{kime_out}}/kime-xdg-autostart -t %{{buildroot}}%{{_bindir}}
 install -Dm755 %{{kime_out}}/kime-check -t %{{buildroot}}%{{_bindir}}
 install -Dm755 %{{kime_out}}/kime-indicator -t %{{buildroot}}%{{_bindir}}
 install -Dm755 %{{kime_out}}/kime-candidate-window -t %{{buildroot}}%{{_bindir}}
 install -Dm755 %{{kime_out}}/kime-xim -t %{{buildroot}}%{{_bindir}}
 install -Dm755 %{{kime_out}}/kime-wayland -t %{{buildroot}}%{{_bindir}}
-install -Dm755 %{{kime_out}}/kime -t %{{buildroot}}%{{_bindir}}
 
 install -Dm755 %{{kime_out}}/libkime_engine.so -t %{{buildroot}}%{{_libdir}}
 install -Dm755 %{{kime_out}}/libkime-gtk3.so %{{buildroot}}%{{_libdir}}/gtk-3.0/3.0.0/immodules/im-kime.so
@@ -106,27 +77,26 @@ install -Dm644 %{{kime_out}}/kime_engine.hpp -t %{{buildroot}}%{{_includedir}}
 install -Dm644 %{{kime_out}}/kime_engine.h -t %{{buildroot}}%{{_includedir}}
 
 # etc
-#install -Dm755 %{{kime_out}}/kime.desktop -t /etc/xdg/autostart
-install -Dm755 %{{kime_out}}/kime-test.desktop /etc/xdg/autostart/kime.desktop
-# install -Dm755 %%{{kime_out}}/kime-xdg-autostart -t %%{{buildroot}}%%{{_bindir}} # reserved for next version
-install -Dm644 %{{kime_out}}/default_config.yaml %{{buildroot}}/etc/xdg/%{{name}}/config.yaml
-mkdir -p %{{buildroot}}%{{_datadir}}/icons/hicolors/64x64/apps
+install -Dm755 %{{kime_out}}/kime.desktop -t /etc/xdg/autostart
 install -Dm644 %{{kime_out}}/icons/64x64/* -t %{{buildroot}}%{{_datadir}}/icons/hicolor/64x64/apps
-# install -Dm644 %%{{kime_out}}/icons/* %%{{buildroot}}%%{{_datadir}}/%%{{name}}/icons/ # reserved for next version
 
 %files
 %license LICENSE*
 %doc README.md
+%doc README.ko.md
 %doc NOTICE.md
 %doc docs/CONFIGURATION.md
+%doc docs/CONFIGURATION.ko.md
 %doc docs/CHANGELOG.md
+%doc res/default_config.yaml
 
+%{{_bindir}}/kime
+%{{_bindir}}/kime-xdg-autostart
 %{{_bindir}}/kime-check
 %{{_bindir}}/kime-indicator
 %{{_bindir}}/kime-candidate-window
 %{{_bindir}}/kime-xim
 %{{_bindir}}/kime-wayland
-%{{_bindir}}/kime
 
 %{{_libdir}}/libkime_engine.so
 %{{_libdir}}/gtk-3.0/3.0.0/immodules/im-kime.so
@@ -137,11 +107,10 @@ install -Dm644 %{{kime_out}}/icons/64x64/* -t %{{buildroot}}%{{_datadir}}/icons/
 %{{_includedir}}/kime_engine.hpp
 %{{_includedir}}/kime_engine.h
 
-# %%{{_bindir}}/kime-xdg-autostart # reserved for next version
-/etc/xdg/%{{name}}/config.yaml
 %{{_datadir}}/icons/hicolor/64x64/apps/*
-# %%{{_datadir}}/%%{{name}}/icons/* # reserved for next version
 """
+
+print(package_spec)
 
 with open(file="kime-git.spec", mode="w") as spec_file:
     spec_file.write(package_spec)
