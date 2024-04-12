@@ -53,7 +53,7 @@ Conflicts: kime
 kime is a fast, lightweight, reliable and highly customizable input engine for Korean input.
 
 %prep
-%autosetup
+%autosetup -n {repo_latest_commit_id}
 
 %build
 scripts/build.sh -ar
@@ -73,8 +73,8 @@ install -Dm755 %{{kime_out}}/libkime-gtk4.so %{{buildroot}}%{{_libdir}}/gtk-4.0/
 install -Dm755 %{{kime_out}}/libkime-qt5.so %{{buildroot}}%{{_libdir}}/qt5/plugins/platforminputcontexts/libkimeplatforminputcontextplugin.so
 install -Dm755 %{{kime_out}}/libkime-qt6.so %{{buildroot}}%{{_libdir}}/qt6/plugins/platforminputcontexts/libkimeplatforminputcontextplugin.so
 
-install -Dm644 %{{kime_out}}/kime_engine.hpp -t %{{buildroot}}%{{_includedir}}
 install -Dm644 %{{kime_out}}/kime_engine.h -t %{{buildroot}}%{{_includedir}}
+install -Dm644 %{{kime_out}}/kime_engine.hpp -t %{{buildroot}}%{{_includedir}}
 
 # etc
 install -Dm755 %{{kime_out}}/kime.desktop -t /etc/xdg/autostart
@@ -104,8 +104,8 @@ install -Dm644 %{{kime_out}}/icons/64x64/* -t %{{buildroot}}%{{_datadir}}/icons/
 %{{_libdir}}/qt5/plugins/platforminputcontexts/libkimeplatforminputcontextplugin.so
 %{{_libdir}}/qt6/plugins/platforminputcontexts/libkimeplatforminputcontextplugin.so
 
-%{{_includedir}}/kime_engine.hpp
 %{{_includedir}}/kime_engine.h
+%{{_includedir}}/kime_engine.hpp
 
 %{{_datadir}}/icons/hicolor/64x64/apps/*
 """
