@@ -28,7 +28,7 @@ Conflicts: kime-git
 kime is a fast, lightweight, reliable and highly customizable input engine for Korean input.
 
 %prep
-%autosetup
+%autosetup -n kime-%{version}
 
 %build
 scripts/build.sh -ar
