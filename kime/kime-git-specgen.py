@@ -6,7 +6,7 @@ OUTPUT_NAME = "kime-git.spec"
 
 REPO_API = "https://api.github.com/repos/Riey/kime"
 REPO_TAGS = f"{REPO_API}/tags"
-REPO_DEV_BRANCH = f"{REPO_API}/branches/develop"
+# REPO_DEV_BRANCH = f"{REPO_API}/branches/develop"
 REPO_DEV_LATEST_COMMIT = f"{REPO_API}/commits?sha=develop&per_page=1&page=1"
 
 COMMIT_COUNT_REGEX = r'[?&]page=(\d+)[^;]*?>\s*;\s*rel\s*=\s*"last"'
