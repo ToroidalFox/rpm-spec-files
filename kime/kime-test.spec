@@ -7,7 +7,7 @@ Url: https://github.com/Riey/kime
 Source0: %{url}/archive/refs/tags/v%{version}.tar.gz
 
 BuildRequires: cmake
-BuildRequires: clang17-devel
+BuildRequires: (clang < 18 or clang17-devel)
 BuildRequires: cargo
 BuildRequires: pkgconf-pkg-config
 BuildRequires: gtk3-devel
