@@ -27,7 +27,7 @@ Source0: %{url}/archive/refs/tags/v%{version}.tar.gz
 #     fontconfig(fontconfig-devel)
 #     freetype(freetype-devel)
 BuildRequires: cmake
-BuildRequires: clang-devel
+BuildRequires: (clang-devel < 18 or clang17-devel)
 BuildRequires: cargo
 BuildRequires: pkgconf-pkg-config
 BuildRequires: gtk3-devel

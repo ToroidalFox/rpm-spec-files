@@ -8,7 +8,7 @@ Url: https://github.com/Riey/kime
 Source0: %{url}/archive/f82ce41.tar.gz
 
 BuildRequires: cmake
-BuildRequires: clang-devel
+BuildRequires: (clang-devel < 18 or clang17-devel)
 BuildRequires: cargo
 BuildRequires: pkgconf-pkg-config
 BuildRequires: gtk3-devel
