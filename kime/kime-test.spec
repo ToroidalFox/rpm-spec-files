@@ -1,7 +1,7 @@
 
 Name: kime-test
 Version: 3.0.2^git_675_f82ce41
-Release: 2
+Release: 3
 License: GPLv3
 Summary: Korean IME
 Url: https://github.com/Riey/kime
@@ -48,6 +48,7 @@ EOF
 
 %install
 install -Dm755 %{kime_out}/kime -t %{buildroot}%{_bindir}
+install -Dm755 %{kime_out}/kime-xdg-autostart -t %{buildroot}%{_bindir}
 install -Dm755 %{kime_out}/kime-check -t %{buildroot}%{_bindir}
 install -Dm755 %{kime_out}/kime-indicator -t %{buildroot}%{_bindir}
 install -Dm755 %{kime_out}/kime-candidate-window -t %{buildroot}%{_bindir}
@@ -79,6 +80,7 @@ install -Dm644 %{kime_out}/icons/64x64/* -t %{buildroot}%{_datadir}/icons/hicolo
 %doc res/default_config.yaml
 
 %{_bindir}/kime
+%{_bindir}/kime-xdg-autostart
 %{_bindir}/kime-check
 %{_bindir}/kime-indicator
 %{_bindir}/kime-candidate-window
