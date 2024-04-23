@@ -1,7 +1,7 @@
 
 Name: kime-test
 Version: 3.0.2^git_675_f82ce41
-Release: 1
+Release: 2
 License: GPLv3
 Summary: Korean IME
 Url: https://github.com/Riey/kime
