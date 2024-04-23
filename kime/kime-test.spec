@@ -1,10 +1,11 @@
+
 Name: kime-test
-Version: 3.0.2
+Version: 3.0.2^git_675_f82ce41
 Release: 1
 License: GPLv3
 Summary: Korean IME
 Url: https://github.com/Riey/kime
-Source0: %{url}/archive/refs/tags/v%{version}.tar.gz
+Source0: %{url}/archive/f82ce41.tar.gz
 
 BuildRequires: cmake
 BuildRequires: (clang-devel < 18 or clang17-devel)
@@ -19,19 +20,30 @@ BuildRequires: libxcb-devel
 BuildRequires: fontconfig-devel
 BuildRequires: freetype-devel
 
+Requires: im-chooser
+
+Conflicts: kime
 Conflicts: kime-git
 
 %define kime_out build/out
+%define kime_imsettings_conf kime-imsettings.conf
 
 %description
-
 kime is a fast, lightweight, reliable and highly customizable input engine for Korean input.
 
 %prep
-%autosetup -n kime-%{version}
+%autosetup -n kime-f82ce419f697d4f836e79bf6c3de074f35f96f23
 
 %build
 scripts/build.sh -ar
+
+cat > %{kime_out}/%{kime_imsettings_conf} << EOF
+SHORT_DESC="kime"
+XIM=kime
+XIM_PROGRAM=kime-xim
+GTK_IM_MODULE=kime
+QT_IM_MODULE=kime
+AUXILIARY_PROGRAM=kime-indicator
 
 %install
 install -Dm755 %{kime_out}/kime -t %{buildroot}%{_bindir}
@@ -51,7 +63,7 @@ install -Dm644 %{kime_out}/kime_engine.h -t %{buildroot}%{_includedir}
 install -Dm644 %{kime_out}/kime_engine.hpp -t %{buildroot}%{_includedir}
 
 # etc
-install -Dm644 %{kime_out}/kime.desktop -t %{buildroot}/etc/xdg/autostart
+install -Dm644 %{kime_out}/%{kime_imsettings_conf} %{buildroot}%{_sysconfdir}/X11/xinit/xinput.d/kime.conf
 install -Dm644 %{kime_out}/kime.desktop -t %{buildroot}%{_datadir}/applications
 install -Dm644 %{kime_out}/icons/64x64/* -t %{buildroot}%{_datadir}/icons/hicolor/64x64/apps
 
@@ -81,6 +93,6 @@ install -Dm644 %{kime_out}/icons/64x64/* -t %{buildroot}%{_datadir}/icons/hicolo
 %{_includedir}/kime_engine.h
 %{_includedir}/kime_engine.hpp
 
-/etc/xdg/autostart/kime.desktop
+%{_sysconfdir}/X11/xinit/xinput.d/kime.conf
 %{_datadir}/applications/kime.desktop
 %{_datadir}/icons/hicolor/64x64/apps/*
