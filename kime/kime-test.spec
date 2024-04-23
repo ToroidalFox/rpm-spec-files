@@ -40,10 +40,11 @@ scripts/build.sh -ar
 cat > %{kime_out}/%{kime_imsettings_conf} << EOF
 SHORT_DESC="kime"
 XIM=kime
-XIM_PROGRAM=kime-xim
+XIM_PROGRAM=%{_bindir}/kime-xim
 GTK_IM_MODULE=kime
 QT_IM_MODULE=kime
-AUXILIARY_PROGRAM=kime-indicator
+AUXILIARY_PROGRAM=%{_bindir}/kime-indicator
+EOF
 
 %install
 install -Dm755 %{kime_out}/kime -t %{buildroot}%{_bindir}
