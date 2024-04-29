@@ -6,10 +6,9 @@ Summary: Korean IME
 Url: https://github.com/Riey/kime
 Source0: %{url}/archive/refs/tags/v%{version}.tar.gz
 
-# NOTE: Currently(3.0.2^git_673_33603e0) `kime.desktop` relies on `kime-xdg-autostart` to be in `/usr/bin` which is same as %%{_bindir} for now. However, restructuring is needed if this changes in the future.
+# NOTE: Currently(3.0.2^git_673_33603e0) `kime.desktop` relies on `kime-xdg-autostart` to be in `/usr/bin` which is same as %%{_bindir} for now. However, restructuring is needed if this changes in the future. Write custom `kime.desktop` independent of source repository.
 
 # hopefully noarch; not tested.
-# BuildArch: noarch
 
 # from README.md of kime github repository,
 # build dependencies(package name):
@@ -39,6 +38,8 @@ BuildRequires: libxcb-devel
 BuildRequires: fontconfig-devel
 BuildRequires: freetype-devel
 
+# check dbus, fontconfig, freetype, libxcb in the future.
+Requires: (google-noto-sans-cjk-fonts or google-noto-sans-cjk-vf-fonts)
 Requires: im-chooser
 
 Conflicts: kime-git
@@ -54,8 +55,10 @@ kime is a fast, lightweight, reliable and highly customizable input engine for K
 %autosetup
 
 %build
+# cherry picked from build.sh. will write custom build script if something breaks catastrophically.
 scripts/build.sh -ar
 
+# custom im-chooser compatibility
 cat > %{kime_out}/%{kime_imsettings_conf} << EOF
 SHORT_DESC="kime"
 XIM=kime

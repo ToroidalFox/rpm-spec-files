@@ -46,6 +46,7 @@ BuildRequires: libxcb-devel
 BuildRequires: fontconfig-devel
 BuildRequires: freetype-devel
 
+Requires: (google-noto-sans-cjk-fonts or google-noto-sans-cjk-vf-fonts)
 Requires: im-chooser
 
 Conflicts: kime
