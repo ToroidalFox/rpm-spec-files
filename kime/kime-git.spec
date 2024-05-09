@@ -20,6 +20,7 @@ BuildRequires: libxcb-devel
 BuildRequires: fontconfig-devel
 BuildRequires: freetype-devel
 
+Requires: (google-noto-sans-cjk-vf-fonts or google-noto-sans-cjk-fonts)
 Requires: im-chooser
 
 Conflicts: kime

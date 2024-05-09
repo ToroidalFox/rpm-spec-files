@@ -11,3 +11,6 @@ This is a repository that contains `.spec` files for rpm package building & main
 
 ### kime
 [[source repo]](https://github.com/Riey/kime) [[copr]](https://copr.fedorainfracloud.org/coprs/toroidalfox/kime)
+
+### sshs
+[[source repo]](https://github.com/quantumsheep/sshs) [[copr]](https://copr.fedorainfracloud.org/coprs/toroidalfox/sshs)

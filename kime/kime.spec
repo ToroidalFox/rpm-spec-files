@@ -39,7 +39,7 @@ BuildRequires: fontconfig-devel
 BuildRequires: freetype-devel
 
 # check dbus, fontconfig, freetype, libxcb in the future.
-Requires: (google-noto-sans-cjk-fonts or google-noto-sans-cjk-vf-fonts)
+Requires: (google-noto-sans-cjk-vf-fonts or google-noto-sans-cjk-fonts)
 Requires: im-chooser
 
 Conflicts: kime-git
