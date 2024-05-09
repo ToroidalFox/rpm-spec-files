@@ -4,7 +4,7 @@ Release: 1
 License: MIT
 Summary: TUI for SSH
 Url: https://github.com/quantumsheep/sshs
-Source0: %{url}/archive/refs/tags/v%{version}.tar.gz
+Source0: %{url}/archive/refs/tags/%{version}.tar.gz
 
 BuildRequires: cargo
 
