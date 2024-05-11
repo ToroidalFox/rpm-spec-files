@@ -13,8 +13,8 @@ BuildRequires: cargo
 BuildRequires: pkgconf-pkg-config
 BuildRequires: gtk3-devel
 BuildRequires: gtk4-devel
-BuildRequires: qt5-qtbase-devel
-BuildRequires: qt6-qtbase-devel
+BuildRequires: qt5-qtbase-private-devel
+BuildRequires: qt6-qtbase-private-devel
 BuildRequires: dbus-devel
 BuildRequires: libxcb-devel
 BuildRequires: fontconfig-devel
