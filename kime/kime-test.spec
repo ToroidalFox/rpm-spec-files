@@ -1,7 +1,7 @@
 
 Name: kime-test
 Version: 3.0.2^git_675_f82ce41
-Release: 3
+Release: 1
 License: GPLv3
 Summary: Korean IME
 Url: https://github.com/Riey/kime
@@ -13,13 +13,14 @@ BuildRequires: cargo
 BuildRequires: pkgconf-pkg-config
 BuildRequires: gtk3-devel
 BuildRequires: gtk4-devel
-BuildRequires: qt5-qtbase-private-devel
-BuildRequires: qt6-qtbase-private-devel
+BuildRequires: qt5-qtbase-devel
+BuildRequires: qt6-qtbase-devel
 BuildRequires: dbus-devel
 BuildRequires: libxcb-devel
 BuildRequires: fontconfig-devel
 BuildRequires: freetype-devel
 
+Requires: (google-noto-sans-cjk-vf-fonts or google-noto-sans-cjk-fonts)
 Requires: im-chooser
 
 Conflicts: kime
