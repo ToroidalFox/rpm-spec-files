@@ -1,7 +1,7 @@
 
 Name: kime-git
 Version: 3.0.2^git_675_f82ce41
-Release: 2
+Release: 3
 License: GPLv3
 Summary: Korean IME
 Url: https://github.com/Riey/kime
