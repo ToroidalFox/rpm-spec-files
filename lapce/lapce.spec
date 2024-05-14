@@ -10,11 +10,8 @@ BuildRequires: clang
 BuildRequires: cargo
 BuildRequires: pkg-config
 BuildRequires: openssl-devel
-BuildRequires: perl-lib
-BuildRequires: perl-FindBin
-BuildRequires: perl-IPC-Cmd
-BuildRequires: perl-File-Compare
-BuildRequires: perl-File-Copy
+BuildRequires: perl
+# `perl` includes `perl-lib`, `perl-FindBin`, `perl-IPC-Cmd`, `perl-File-Compare`, `perl-File-Copy` as dependency.
 
 %description
 Lapce (IPA: /læps/) is written in pure Rust with a UI in Floem. It is designed with Rope Science from the Xi-Editor which makes for lightning-fast computation, and leverages Wgpu for rendering.
@@ -26,8 +23,8 @@ Lapce (IPA: /læps/) is written in pure Rust with a UI in Floem. It is designed 
 cargo build --profile release-lto
 
 %install
-install -Dm755 target/release/%{name} -t %{buildroot}%{_bindir}
-install -Dm755 target/release/%{name}-proxy -t %{buildroot}%{_bindir}
+install -Dm755 target/release-lto/%{name} -t %{buildroot}%{_bindir}
+install -Dm755 target/release-lto/%{name}-proxy -t %{buildroot}%{_bindir}
 install -Dm644 extra/linux/dev.lapce.lapce.desktop -t %{buildroot}%{_datadir}/applications
 install -Dm644 extra/linux/dev.lapce.lapce.metainfo.xml -t %{buildroot}%{_datadir}/metainfo
 install -Dm644 extra/images/logo.png %{buildroot}%{_datadir}/pixmaps/dev.lapce.lapce.png
