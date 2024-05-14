@@ -22,7 +22,7 @@ Lapce (IPA: /læps/) is written in pure Rust with a UI in Floem. It is designed 
 %autosetup
 
 %build
-RUSTFLAGS="-C linker=clang -C link-arg=-fuse-ld=mold" cargo build --profile release-lto
+RUSTFLAGS="-C linker=clang -C link-args=-g -fuse-ld=mold" cargo build --profile release-lto
 
 %install
 install -Dm755 target/release-lto/%{name} -t %{buildroot}%{_bindir}
