@@ -12,6 +12,8 @@ BuildRequires: pkg-config
 BuildRequires: openssl-devel
 BuildRequires: perl
 # `perl` includes `perl-lib`, `perl-FindBin`, `perl-IPC-Cmd`, `perl-File-Compare`, `perl-File-Copy` as dependency.
+BuildRequires: mold
+# `mold` for link speed
 
 %description
 Lapce (IPA: /læps/) is written in pure Rust with a UI in Floem. It is designed with Rope Science from the Xi-Editor which makes for lightning-fast computation, and leverages Wgpu for rendering.
@@ -20,7 +22,7 @@ Lapce (IPA: /læps/) is written in pure Rust with a UI in Floem. It is designed 
 %autosetup
 
 %build
-cargo build --profile release-lto
+RUSTFLAGS="-C linker=clang -C link-arg=-fuse-ld=mold -C link-arg=-g" cargo build --profile release-lto
 
 %install
 install -Dm755 target/release-lto/%{name} -t %{buildroot}%{_bindir}
