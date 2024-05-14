@@ -10,6 +10,7 @@ BuildRequires: clang
 BuildRequires: cargo
 BuildRequires: pkg-config
 BuildRequires: openssl-devel
+BuildRequires: perl-lib
 BuildRequires: perl-FindBin
 BuildRequires: perl-IPC-Cmd
 BuildRequires: perl-File-Compare

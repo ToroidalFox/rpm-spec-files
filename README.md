@@ -14,3 +14,6 @@ This is a repository that contains `.spec` files for rpm package building & main
 
 ### sshs
 [[source repo]](https://github.com/quantumsheep/sshs) [[copr]](https://copr.fedorainfracloud.org/coprs/toroidalfox/sshs)
+
+### lapce
+[[source repo]](https://github.com/lapce/lapce) [[copr]](https://copr.fedorainfracloud.org/coprs/toroidalfox/lapce)
