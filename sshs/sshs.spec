@@ -1,5 +1,5 @@
 Name: sshs
-Version: 4.3.0
+Version: 4.4.1
 Release: 1
 License: MIT
 Summary: TUI for SSH
@@ -25,6 +25,5 @@ install -Dm755 target/release/%{name} -t %{buildroot}%{_bindir}
 
 %files
 %license LICENSE*
-%doc README.md
 
 %{_bindir}/%{name}
